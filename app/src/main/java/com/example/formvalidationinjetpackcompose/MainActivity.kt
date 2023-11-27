@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.formvalidationinjetpackcompose.ui.screens.ProfileValidationScreen
 import com.example.formvalidationinjetpackcompose.ui.theme.FormValidationInJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Androids")
+                    ProfileValidationScreen()
                 }
             }
         }
@@ -38,6 +39,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     FormValidationInJetpackComposeTheme {
-        Greeting("Android")
+        ProfileValidationScreen()
     }
 }

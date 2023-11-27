@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -14,21 +13,47 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
+
 
 
 @Composable
-fun Address (
-    value: MutableState<String>, onTextChanged: (String)-> Unit) {
-    Column {
+fun Name(
+    value: String, onTextChanged: (String) -> Unit, bottomPadding: Int = 15,
+    content: @Composable () -> Unit, isError: Boolean = false,
+
+    ) {
+    Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
+        TitleText(text = "Input name")
+
         OutlinedTextField(
             value = value,
             onValueChange = onTextChanged,
-            placeholder = { Text(text = "Include house number and street")}
+            placeholder = { Text(text = "Include first name and last name") },
+            shape = RoundedCornerShape(10),
+            isError = isError
         )
+        content()
     }
+}
 
+@Composable
+fun Email(
+    value: String, onTextChanged: (String) -> Unit, bottomPadding: Int = 15,
+    content: @Composable () -> Unit, isError: Boolean = false,
+
+    ) {
+    Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
+        TitleText(text = "Input email")
+
+        OutlinedTextField(
+            value = value,
+            onValueChange = onTextChanged,
+            placeholder = { Text(text = "Please provide a valid email address") },
+            shape = RoundedCornerShape(10),
+            isError = isError
+        )
+        content()
+    }
 }
 
 @Composable
@@ -37,9 +62,9 @@ fun SelectGender(
     onSelectGender: () -> Unit,
     onGenderSelected: (String) -> Unit,
     content: @Composable () -> Unit,
-    isError: Boolean
+    isError: Boolean,
 
-) {
+    ) {
     val genderOptions = listOf("Male", "Female")
     var expanded by remember { mutableStateOf(false) }
 
@@ -52,9 +77,9 @@ fun SelectGender(
         Text(
             text = "Gender",
             fontWeight = FontWeight.W500,
-            modifier = Modifier.clickable {
-                onSelectGender()
-            }
+//            modifier = Modifier.clickable {
+//                onSelectGender()
+//            }
         )
 
         Box(
@@ -93,12 +118,40 @@ fun SelectGender(
 
 
 @Composable
+fun Address(
+    value: String, onTextChanged: (String) -> Unit, bottomPadding: Int = 15,
+    content: @Composable () -> Unit, isError: Boolean = false,
+
+    ) {
+    Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
+        TitleText(text = "Input address")
+        OutlinedTextField(
+            value = value,
+            onValueChange = onTextChanged,
+            placeholder = { Text(text = "Include house number and street") },
+            shape = RoundedCornerShape(10),
+            isError = isError
+        )
+        content()
+    }
+}
+
+
+@Composable
+fun TitleText(text: String) {
+    Text(
+        text = text,
+        modifier = Modifier.paddingFromBaseline(bottom = 5.dp)
+    )
+}
+
+@Composable
 fun OutlinedTextFieldWithTrailingIconButton(
-    value: String? = "",
+    value: String,
     placeholderText: String,
     bottomPadding: Int = 15,
     onClick: () -> Unit = {}, isError: Boolean = false,
-    onTextChanged: (text: String) -> Unit = {}
+    onTextChanged: (text: String) -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -147,3 +200,104 @@ fun OutlinedTextFieldWithTrailingIconButton(
         )
     }
 }
+
+
+//@Composable
+//fun SelectState(
+//    value: String,
+//    expanded: MutableState<Boolean>,
+////    listItems: ArrayList<String>,
+//    onChangeText: (String) -> Unit,
+//    onSelectState: () -> Unit,
+//    content: @Composable () -> Unit, isError: Boolean,
+//
+//    ) {
+//    Column(
+//        modifier = Modifier.padding(bottom = 17.dp)
+//    ) {
+//        Text(
+//            text = "State", fontWeight = FontWeight.W500
+//        )
+//        OutlinedTextFieldWithTrailingIconButton(
+//            value = value,
+//            placeholderText = "Select a state",
+//            bottomPadding = 3,
+//            onClick = onSelectState,
+//            onTextChanged = onChangeText, isError = isError,
+//
+//            )
+//
+//        DropdownMenu(
+//            modifier = Modifier
+//                .height(550.dp)
+//                .width(160.dp),
+////                .onGloballyPositioned { coordinates ->
+////                    // This value is used to assign to
+////                    // the DropDown the same width
+//////                    mTextFieldSize = coordinates.size.toSize()
+////                },
+//            expanded = expanded.value,
+//            onDismissRequest = {
+//                expanded.value = false
+//            }) {
+//            statesInNigeria.forEachIndexed { _, itemValue ->
+//                DropdownMenuItem(
+//                    onClick = {
+//                        onChangeText(itemValue)
+//                        expanded.value = false
+//                    },
+//                    content = {
+//                        Text(
+//                            text = itemValue,
+//                            modifier = Modifier.clickable {
+//                                onChangeText(itemValue)
+//                                expanded.value = false
+//                            }
+//                                .padding(bottom = 15.dp)
+//                        )
+//                    }
+//                )
+//            }
+//        }
+//        content()
+//    }
+//}
+
+//val statesInNigeria = arrayListOf(
+//    "Abia",
+//    "Adamawa",
+//    "Akwa Ibom",
+//    "Anambra",
+//    "Bauchi",
+//    "Bayelsa",
+//    "Benue",
+//    "Borno",
+//    "Cross River",
+//    "Delta",
+//    "Ebonyi",
+//    "Edo",
+//    "Ekiti",
+//    "Enugu",
+//    "Gombe",
+//    "Imo",
+//    "Jigawa",
+//    "Kaduna",
+//    "Kano",
+//    "Katsina",
+//    "Kebbi",
+//    "Kogi",
+//    "Kwara",
+//    "Lagos",
+//    "Nasarawa",
+//    "Niger",
+//    "Ogun",
+//    "Ondo",
+//    "Osun",
+//    "Oyo",
+//    "Plateau",
+//    "Rivers",
+//    "Sokoto",
+//    "Taraba",
+//    "Yobe",
+//    "Zamfara"
+//)
