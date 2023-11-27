@@ -20,12 +20,17 @@ fun ProfileValidationScreen() {
 
     var selectedGender by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
+    var stateValue by remember { mutableStateOf("") }
     var address by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var selectedState by remember { mutableStateOf("") }
     var displayGenderDropDown by remember { mutableStateOf(false) }
     var displayState by remember { mutableStateOf(false) }
     val genderErrorMessage = remember { mutableStateOf("") }
+    val addressErrorMessage = remember { mutableStateOf("") }
+    val nameErrorMessage = remember { mutableStateOf("") }
+    val stateErrorMessage = remember { mutableStateOf("") }
+
 
     Scaffold(
         topBar = {
@@ -86,7 +91,13 @@ fun ProfileValidationScreen() {
 
             Button(
                 onClick = {
-                    var isValid =
+                    var isValid = validateInput(
+                        address = address,
+                        email = email,
+                        state = stateValue,
+                        name = name,
+                        addressErrorMessage = addressErrorMessage
+                    )
                 }
             ) {
                 Text(text = "Validate")
