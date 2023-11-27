@@ -23,14 +23,15 @@ fun Name(
 
     ) {
     Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
-        TitleText(text = "Input name")
+        TitleText(text = "Name")
 
         OutlinedTextField(
             value = value,
             onValueChange = onTextChanged,
             placeholder = { Text(text = "Include first name and last name") },
             shape = RoundedCornerShape(10),
-            isError = isError
+            isError = isError,
+            modifier = Modifier.fillMaxWidth()
         )
         content()
     }
@@ -43,14 +44,15 @@ fun Email(
 
     ) {
     Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
-        TitleText(text = "Input email")
+        TitleText(text = "Email")
 
         OutlinedTextField(
             value = value,
             onValueChange = onTextChanged,
             placeholder = { Text(text = "Please provide a valid email address") },
             shape = RoundedCornerShape(10),
-            isError = isError
+            isError = isError,
+            modifier = Modifier.fillMaxWidth()
         )
         content()
     }
@@ -59,7 +61,6 @@ fun Email(
 @Composable
 fun SelectGender(
     selectedGender: String?,
-    onSelectGender: () -> Unit,
     onGenderSelected: (String) -> Unit,
     content: @Composable () -> Unit,
     isError: Boolean,
@@ -77,9 +78,7 @@ fun SelectGender(
         Text(
             text = "Gender",
             fontWeight = FontWeight.W500,
-//            modifier = Modifier.clickable {
-//                onSelectGender()
-//            }
+            modifier = Modifier.padding(bottom = 7.dp)
         )
 
         Box(
@@ -123,14 +122,18 @@ fun Address(
     content: @Composable () -> Unit, isError: Boolean = false,
 
     ) {
-    Column(modifier = Modifier.padding(bottom = bottomPadding.dp)) {
-        TitleText(text = "Input address")
+    Column(modifier = Modifier.padding(bottom = bottomPadding.dp)
+        .fillMaxWidth()
+    ) {
+        TitleText(text = "Address")
         OutlinedTextField(
             value = value,
             onValueChange = onTextChanged,
             placeholder = { Text(text = "Include house number and street") },
             shape = RoundedCornerShape(10),
-            isError = isError
+            isError = isError,
+            modifier = Modifier.fillMaxWidth()
+
         )
         content()
     }
@@ -141,7 +144,8 @@ fun Address(
 fun TitleText(text: String) {
     Text(
         text = text,
-        modifier = Modifier.paddingFromBaseline(bottom = 5.dp)
+        modifier = Modifier.paddingFromBaseline(bottom = 10.dp),
+        fontWeight = FontWeight.W500
     )
 }
 
