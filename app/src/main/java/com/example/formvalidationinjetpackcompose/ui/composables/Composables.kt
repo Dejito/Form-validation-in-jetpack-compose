@@ -133,7 +133,6 @@ fun Address(
             shape = RoundedCornerShape(10),
             isError = isError,
             modifier = Modifier.fillMaxWidth()
-
         )
         content()
     }
@@ -179,7 +178,6 @@ fun OutlinedTextFieldWithTrailingIconButton(
                 Text(
                     text = placeholderText,
                     fontSize = 14.sp,
-//                    color = Color.Black
                 )
             },
             singleLine = true,
@@ -196,7 +194,6 @@ fun OutlinedTextFieldWithTrailingIconButton(
 
                 }
             },
-//                color = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(51.dp)
